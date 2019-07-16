@@ -1,0 +1,39 @@
+{
+  "name": "dobby",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@discordjs/uws": "^10.149.0",
+    "bufferutil": "^4.0.0",
+    "coordinate-parser": "^1.0.2",
+    "csv-parse": "^4.4.3",
+    "csv-parser": "^2.3.0",
+    "csvtojson": "^2.0.8",
+    "discord.js": "^11.5.1",
+    "erlpack": "github:discordapp/erlpack",
+    "json2csv": "^4.5.1",
+    "libsodium-wrappers": "^0.7.3",
+    "moment-timezone": "^0.5.25",
+    "ms": "^2.1.2",
+    "node-csv": "^0.1.2",
+    "node-fetch": "^2.6.0",
+    "numeral": "^2.0.6",
+    "parse-ms": "^2.1.0",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "plural": "^1.1.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "sequelize": "^5.10.1",
+    "string-similarity": "^3.0.0",
+    "tz-lookup": "^6.1.18",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
