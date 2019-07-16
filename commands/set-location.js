@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Coordinates = require("coordinate-parser");
-const request = require("request-promise-native");
-const botconfig = require("../botconfig.json");
+const nodeFetch = require("node-fetch");
+const botConfig = require("../botconfig.json");
 
 module.exports = {
   name: "set-location",
@@ -22,7 +22,11 @@ module.exports = {
     if (!isLocationValid(args.join(" "))) return message.channel.send("Invalid Coordinates.");
     const location = new Coordinates(args.join(" "));
 
-    const locationObject = await request(`https://us1.locationiq.com/v1/reverse.php?key=${botconfig.locationIQ}&lat=${location.latitude}&lon=${location.longitude}&format=json`);
+    let locationObject = await nodeFetch(`https://us1.locationiq.com/v1/reverse.php?key=${botConfig.locationIQ}&lat=${location.latitude}&lon=${location.longitude}&format=json`, {
+      method: "GET"
+    });
+
+    locationObject = await locationObject.json();
 
     const guild = await bot.guildInfo.get(bot, message.guild);
     if (guild.location.coordinates === `${location.latitude}, ${location.longitude}`) return message.channel.send("Your server is already set to these coordinates!");
