@@ -9,23 +9,33 @@ module.exports = {
   aliases: ["sprouting-list"],
   async execute(message, args, bot) {
     const guildData = await bot.guildInfo.get(bot, message.guild);
+
+    const unfilteredPlanted = [...guildData.planted];
+
+    guildData.planted = guildData.planted.filter(p => !p.archived);
+
+    if (args[0] === "all" && message.member.hasPermission("MANAGE_GUILDS")) {
+      guildData.planted = unfilteredPlanted;
+    } else if (args[0] === "archived" && message.member.hasPermission("MANAGE_GUILDS")) {
+      guildData.planted = unfilteredPlanted.filter(p => p.archived);
+    }
+
     if (guildData.planted.length <= 0) return message.channel.send("There are no planted seeds in this guild.");
 
-    let planted = guildData.planted;
-    if (args[0]) planted = planted.filter(p => p.greenhouse.includes(args.join(" ")) || p.seed.includes(args.join(" ")));
+    if (args[0] && !(["all", "archived"].includes(args[0]) && message.member.hasPermission("MANAGE_MESSAGES"))) guildData.planted = guildData.planted.filter(p => p.greenhouse.includes(args.join(" ")) || p.seed.includes(args.join(" ")));
 
-    planted = planted.map(p => `**ID:** ${guildData.planted.indexOf(p) + 1}\n**Greenhouse:** ${p.greenhouse.charAt(0).toUpperCase() + p.greenhouse.slice(1)}\n**Seed:** ${p.seed.charAt(0).toUpperCase() + p.seed.slice(1)} seed\n**Time:** ${p.sprouted ? timeSinceSprout(p.time) : timeUntilSprout(p.time)}`);
+    guildData.planted = guildData.planted.map(p => `**ID:** ${guildData.planted.indexOf(p) + 1}\n**Greenhouse:** ${p.greenhouse.charAt(0).toUpperCase() + p.greenhouse.slice(1)}\n**Seed:** ${p.seed.charAt(0).toUpperCase() + p.seed.slice(1)} seed\n**Time:** ${p.sprouted ? timeSinceSprout(p.time) : timeUntilSprout(p.time)}`);
 
-    if (planted.length <= 0) return message.channel.send("There are no planted seeds matching that search query.");
+    if (guildData.planted.length <= 0) return message.channel.send("There are no planted seeds matching that search query.");
 
-    const plantedCopy = [...planted];
+    const plantedCopy = [...guildData.planted];
 
     const pageLength = 6;
     const embeds = [];
 
-    for (let i = 0; i < planted.length; i += pageLength) {
+    for (let i = 0; i < guildData.planted.length; i += pageLength) {
       const greenhouseEmbed = new Discord.RichEmbed()
-        .setAuthor(`Page ${(i / pageLength) + 1}/${Math.ceil((planted.length / pageLength))}`)
+        .setAuthor(`Page ${(i / pageLength) + 1}/${Math.ceil((guildData.planted.length / pageLength))}`)
         .setColor(message.guild.me.displayHexColor)
         .setTimestamp();
 

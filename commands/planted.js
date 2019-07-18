@@ -50,7 +50,8 @@ module.exports = {
       channel: message.channel.id,
       message: message.id,
       users: [],
-      sprouted: false
+      sprouted: false,
+      archived: false
     };
 
     if (guildData.planted.find(p => p.greenhouse === greenhouse.join(" "))) return message.channel.send("Someone has already reported that greenhouse!");

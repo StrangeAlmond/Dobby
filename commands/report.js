@@ -26,7 +26,8 @@ module.exports = {
       details: args.slice(1).join(" "),
       threatLevel: threatLevel,
       user: message.member.id,
-      time: Date.now()
+      time: Date.now(),
+      archived: false
     };
 
     if (guildInfo.poi.some(p => args.slice(1).join(" ").includes(p.name.toLowerCase())) || guildInfo.poi.some(p => p.aliases.find(a => a.toLowerCase() === args.slice(1).join(" ")))) {
