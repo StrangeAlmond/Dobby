@@ -22,17 +22,19 @@ module.exports = {
       if (!guildData) return;
 
       if (guildData.settings["profession-roles"]) {
-        if (!guild.roles.find(r => r.name.toLowerCase() === professionChosen)) {
-          await guild.createRole({
+
+        let professionRole = guild.roles.find(r => r.name.toLowerCase() === professionChosen);
+
+        if (!professionRole) {
+          professionRole = await guild.createRole({
             name: professionChosen
           }).catch(err => console.error(err));
         }
+
+        if (member.roles.find(r => professions.includes(r.name.toLowerCase()))) await member.removeRole(member.roles.find(r => professions.includes(r.name.toLowerCase())));
+
+        member.addRole(professionRole).catch(err => console.error(err));
       }
-
-      if (member.roles.find(r => professions.includes(r.name.toLowerCase()))) member.removeRole(member.roles.find(r => professions.includes(r.name.toLowerCase())).id);
-
-      const professionRole = guild.roles.find(r => r.name.toLowerCase() === professionChosen);
-      member.addRole(professionRole.id).catch(err => console.error(err));
     });
 
     userData.profession = professionChosen;

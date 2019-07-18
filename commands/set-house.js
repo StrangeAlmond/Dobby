@@ -30,18 +30,17 @@ module.exports = {
       if (!guildData.settings["house-roles"]) return;
 
       const member = g.members.get(message.author.id);
+      let houseRole = g.roles.find(r => r.name.toLowerCase() === house);
 
-      if (!g.roles.find(r => r.name.toLowerCase() === house)) {
-        await message.guild.createRole({
+      if (!houseRole) {
+        houseRole = await message.guild.createRole({
           name: house
         }).catch(err => console.error(err));
       }
 
-      if (member.roles.find(r => houses.includes(r.name.toLowerCase()))) {
-        member.removeRole(member.roles.find(r => houses.includes(r.name.toLowerCase()))).catch(err => console.error(err));
-      }
+      if (member.roles.find(r => houses.includes(r.name.toLowerCase()))) await member.removeRole(member.roles.find(r => houses.includes(r.name.toLowerCase()))).catch(err => console.error(err));
 
-      member.addRole(g.roles.find(r => r.name.toLowerCase() === house)).catch(err => console.error(err));
+      member.addRole(houseRole).catch(err => console.error(err));
     });
 
     message.channel.send(`Got it! Your house has been set to **${house}**`);
