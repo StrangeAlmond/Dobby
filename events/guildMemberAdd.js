@@ -2,9 +2,7 @@ module.exports = async (bot, member) => {
 
   const guildData = await bot.guildInfo.get(bot, member.guild);
 
-  console.log(guildData.settings.welcomeMessage);
   if (guildData.settings.welcomeMessage) {
-    console.log(guildData.welcomeMessage);
     if (!member.guild.channels.get(guildData.welcomeMessage.channel)) return;
     const message = guildData.welcomeMessage.message.replace(/{user}/g, member).replace(/{user.username}/g, member.user.username).replace(/{user.nickname}/g, member.displayName).replace(/{server}/g, member.guild.name);
     bot.channels.get(guildData.welcomeMessage.channel).send(message);
