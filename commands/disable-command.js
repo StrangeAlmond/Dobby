@@ -16,7 +16,7 @@ module.exports = {
       return message.reply("❌ | That command does not exist");
     }
 
-    const blacklistedCommands = ["disable-command", "enable-command", "help", "settings", "set-prefix", "toggle", "reset", "configure"];
+    const blacklistedCommands = ["disable-command", "enable-command", "settings", "set-prefix", "toggle", "reset", "configure"];
 
     if (guild.disabledCommands.includes(command)) return message.channel.send("That command is already disabled!");
     if (blacklistedCommands.includes(command)) return message.channel.send("You can't disable that command!");
