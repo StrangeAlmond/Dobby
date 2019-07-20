@@ -41,6 +41,19 @@ module.exports = async (bot, message) => {
 
   }
 
+  let users = await bot.userInfo.findAll({
+    where: {
+      guild: message.guild.id
+    }
+  });
+
+  if (users.find(u => !message.guild.members.get(u.user))) {
+    users = users.filter(u => !message.guild.members.get(u.user));
+    users.forEach(user => {
+      bot.userInfo.delete(bot, user, message.guild);
+    });
+  }
+
   if (!message.content.startsWith(guildData.settings.prefix)) return;
 
   const args = message.content.toLowerCase().slice(guildData.settings.prefix.length).split(/ +/);

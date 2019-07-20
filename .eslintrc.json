@@ -50,6 +50,7 @@
     "spaced-comment": "error",
     "yoda": "error",
     "semi": ["error", "always"],
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-regex-spaces": "off"
   }
 }

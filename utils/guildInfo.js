@@ -4,13 +4,13 @@ module.exports = {
 
     let guildData = await bot.guildInfo.findOne({
       where: {
-        guild: guild.id
+        guild: guild.guild || guild.id
       }
     });
 
     if (!guildData) {
       await bot.guildInfo.create({
-        guild: guild.id,
+        guild: guild.guild || guild.id,
         poi: [],
         reports: [],
         badges: [],
@@ -41,7 +41,7 @@ module.exports = {
   get: async function (bot, guild) {
     const guildData = await bot.guildInfo.findOne({
       where: {
-        guild: guild.id
+        guild: guild.guild || guild.id
       }
     });
 
@@ -51,7 +51,7 @@ module.exports = {
   set: async function (bot, newValues, guild) {
     const guildData = await bot.guildInfo.findOne({
       where: {
-        guild: guild.id
+        guild: guild.guild || guild.id
       }
     });
 
@@ -61,7 +61,7 @@ module.exports = {
   delete: async function (bot, guild) {
     bot.guildInfo.destroy({
       where: {
-        guild: guild.id
+        guild: guild.guild || guild.id
       }
     });
   }

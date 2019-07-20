@@ -2,14 +2,14 @@ module.exports = {
   ensure: async function (bot, user, guild) {
     let userData = await bot.userInfo.findOne({
       where: {
-        user: user.id,
+        user: user.user || user.id,
         guild: guild.id
       }
     });
 
     if (!userData) {
       await bot.userInfo.create({
-        user: user.id,
+        user: user.user || user.id,
         guild: guild.id,
         reports: [],
         badges: [],
@@ -39,7 +39,7 @@ module.exports = {
   get: async function (bot, user, guild) {
     const userData = await bot.userInfo.findOne({
       where: {
-        user: user.id,
+        user: user.user || user.id,
         guild: guild.id
       }
     });
@@ -50,7 +50,7 @@ module.exports = {
   set: async function (bot, newValues, user, guild) {
     const userData = await bot.userInfo.findOne({
       where: {
-        user: user.id,
+        user: user.user || user.id,
         guild: guild.id
       }
     });
@@ -61,7 +61,7 @@ module.exports = {
   delete: async function (bot, user, guild) {
     bot.userInfo.destroy({
       where: {
-        user: user.id,
+        user: user.user || user.id,
         guild: guild.id
       }
     });
