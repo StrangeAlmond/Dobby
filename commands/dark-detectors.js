@@ -15,7 +15,7 @@ module.exports = {
     for (let i = 0; i < darkDetectorsCopy.length; i += pageLength) {
       const embed = new Discord.RichEmbed()
         .setAuthor(`Page ${(i / 9) + 1}/${Math.ceil(darkDetectorsCopy.length / 9)}`)
-        .setColor(message.guild.me.displayAvatarURL)
+        .setColor(message.guild.me.displayHexColor)
         .setTimestamp();
 
       const darkDetectors = guildInfo.darkDetectors.splice(0, pageLength);
