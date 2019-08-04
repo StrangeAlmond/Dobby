@@ -15,6 +15,7 @@ module.exports = {
         reports: [],
         badges: [],
         disabledCommands: [],
+
         settings: {
           "profession-roles": hasManageRoles,
           "house-roles": hasManageRoles,
@@ -23,15 +24,20 @@ module.exports = {
           "prefix": "!",
           "welcomeMessage": false
         },
+
         location: {
           "coordinates": "",
           "location": ""
         },
+
         planted: [],
+
         welcomeMessage: {
           message: "Welcome to {server} {user.nickname}!",
           channel: null
-        }
+        },
+
+        darkDetectors: []
       }).then(newGuilData => guildData = newGuilData);
     }
 

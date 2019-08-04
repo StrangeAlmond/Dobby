@@ -41,7 +41,8 @@ bot.guildInfo = sequelize.define("guilds", {
   settings: Sequelize.JSON,
   location: Sequelize.JSON,
   planted: Sequelize.ARRAY(Sequelize.JSON),
-  welcomeMessage: Sequelize.JSON
+  welcomeMessage: Sequelize.JSON,
+  darkDetectors: Sequelize.ARRAY(Sequelize.JSON)
 });
 
 const winston = require("winston");

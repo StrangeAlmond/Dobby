@@ -12,8 +12,8 @@ module.exports = async bot => {
     bot.user.setActivity(`!help | Version ${botconfig.version}`);
   }, 300000);
 
-  bot.userInfo.sync();
-  bot.guildInfo.sync();
+  await bot.userInfo.sync();
+  await bot.guildInfo.sync();
 
   bot.userInfo.get = userInfo.get;
   bot.userInfo.ensure = userInfo.ensure;
@@ -101,6 +101,18 @@ module.exports = async bot => {
         bot.logger.log("info", "Report removed from DB.");
 
       });
+
+      [...guild.darkDetectors].forEach(async darkDetector => {
+        if ((Date.now() - darkDetector.time) < 1800000) return;
+
+        guild.darkDetectors.splice(guild.darkDetectors.findIndex(d => d.time === darkDetector.time), 1);
+        await bot.guildInfo.set(bot, {
+          darkDetectors: guild.darkDetectors
+        }, bot.guilds.get(guild.guild));
+
+        bot.logger.log("info", "Dark detector removed from DB.");
+      });
+
     });
   }, 15000);
 
