@@ -6,7 +6,7 @@ module.exports = {
   description: "Subscribe to an alert",
   aliases: ["signup", "want"],
   async execute(message, args, bot) {
-    const possibleSubscriptions = ["emergency", "severe", "high", "medium", "low"];
+    const possibleSubscriptions = ["emergency", "severe", "high", "medium", "low", "dark-detector"];
 
     if (!possibleSubscriptions.some(s => args[0].includes(s))) return;
     const subscription = sm.findBestMatch(args[0], possibleSubscriptions).bestMatch.target;

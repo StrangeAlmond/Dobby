@@ -30,6 +30,18 @@ module.exports = {
       darkDetectors: guildData.darkDetectors
     }, message.guild);
 
-    message.channel.send(`Got it! You have reported **${amount}** dark detectors at **${fortress}**`);
+    const role = message.guild.roles.find(r => r.name.toLowerCase() === "dark-detector");
+
+    const embed = new Discord.RichEmbed()
+      .setAuthor("Dark detector reported!", message.author.displayAvatarURL)
+      .setDescription(`**${fortress}** has **${amount}** dark detectors!`)
+      .setColor(message.guild.me.displayHexColor)
+      .setTimestamp();
+
+    if (role) {
+      message.channel.send(role, embed);
+    } else {
+      message.channel.send(embed);
+    }
   },
 };

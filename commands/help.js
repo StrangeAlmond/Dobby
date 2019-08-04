@@ -38,9 +38,9 @@ module.exports = {
       "Reports": {
         "leaderboard": `**${prefix}leaderboard [emergency/severe/high/medium/low/level/xp/stats]** - View the reporting leaderboard.`,
         "list": `**${prefix}list [emergency/severe/high/medium/low]** - List the reported foundables in this server.`,
-        "report": `**${prefix}report <emergency/severe/high/medium/low> <details>** - Report a foundable.`,
-        "subscribe": `**${prefix}subscribe <emergency/severe/high/medium/low>** - Subsrine to foundable notifications based on the threat level.`,
-        "unsubscribe": `**${prefix}unsubscribe <emergency/severe/high/medium/low>** - Unsubscribe from foundable notifications for the specified threat level.`,
+        "report": `**${prefix}report <emergency/severe/high/medium/low/dark-detector> <details>** - Report a foundable.`,
+        "subscribe": `**${prefix}subscribe <emergency/severe/high/medium/low/dark-detector>** - Subscribe to notifications.`,
+        "unsubscribe": `**${prefix}unsubscribe <emergency/severe/high/medium/low>** - Unsubscribe from notifications.`,
         "subscriptions": `**${prefix}subscriptions** - View your subscriptions.`
       },
 
