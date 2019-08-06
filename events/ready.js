@@ -27,7 +27,7 @@ module.exports = async bot => {
 
   setInterval(async () => {
     let guilds = await bot.guildInfo.findAll();
-    guilds = guilds.filter(u => u.planted.length > 0 || u.reports.length > 0);
+    guilds = guilds.filter(g => g.planted.filter(p => !p.archived).length > 0 || g.reports.filter(r => !r.archived).length > 0 || g.darkDetectors.length > 0);
 
     guilds.forEach(async guild => {
 
@@ -103,6 +103,7 @@ module.exports = async bot => {
       });
 
       [...guild.darkDetectors].forEach(async darkDetector => {
+
         if ((Date.now() - darkDetector.time) < 1800000) return;
 
         guild.darkDetectors.splice(guild.darkDetectors.findIndex(d => d.time === darkDetector.time), 1);
@@ -116,5 +117,5 @@ module.exports = async bot => {
     });
   }, 15000);
 
-  console.log(`Bot is logged in!\nBot was ready at: ${moment().tz("America/Los_Angeles").format("LLLL")}\nUser: ${bot.user.username}\nGuilds: ${bot.guilds.size}\nMembers: ${bot.users.size}\nChannels: ${bot.channels.size}\nPrefix: ${prefix}\nCommands Loaded: ${bot.commands.size}\nBot is logged in!`);
+  bot.logger.log("info", `Bot is logged in!\nBot was ready at: ${moment().tz("America/Los_Angeles").format("LLLL")}\nUser: ${bot.user.username}\nGuilds: ${bot.guilds.size}\nMembers: ${bot.users.size}\nChannels: ${bot.channels.size}\nPrefix: ${prefix}\nCommands Loaded: ${bot.commands.size}\nBot is logged in!`);
 };
