@@ -35,28 +35,17 @@ module.exports = {
         "badge": `**${prefix}badge list** - View ${message.guild.name}'s Available Badges.`
       },
 
-      "Reports": {
-        "leaderboard": `**${prefix}leaderboard [emergency/severe/high/medium/low/level/xp/stats]** - View the reporting leaderboard.`,
-        "list": `**${prefix}list [emergency/severe/high/medium/low]** - List the reported foundables in this server.`,
-        "report": `**${prefix}report <emergency/severe/high/medium/low/dark-detector> <details>** - Report a foundable.`,
-        "subscribe": `**${prefix}subscribe <emergency/severe/high/medium/low/dark-detector>** - Subscribe to notifications.`,
-        "unsubscribe": `**${prefix}unsubscribe <emergency/severe/high/medium/low>** - Unsubscribe from notifications.`,
-        "subscriptions": `**${prefix}subscriptions** - View your subscriptions.`
-      },
-
       "Servers": {
-        "servers": `**${prefix}servers [page]** - Get the server list for that page.`
+        "servers": `**${prefix}servers [page]** - View a list of HP:WU servers.`
       },
 
       "Points of Interest": {
-        "poi": `**${prefix}poi search <name>** - Search for a POI.\n**${prefix}poi list** - View a list of this servers POI.${hasTrustedRole ? `\n**${prefix}poi create <fortress/greenhouse/inn> <"name"> <coordinates>** Create a POI.` : ""}`
+        "poi": `**${prefix}poi search <name>** - Search for a POI.\n**${prefix}poi list** - View a list of this server's POI.${hasTrustedRole ? `\n**${prefix}poi create <fortress/greenhouse/inn> <"name"> <coordinates>** - Create a POI.` : ""}`
       },
 
       "Wizards Unite": {
         "resources": `**${prefix}resources** - View a list of resources for WU.`,
         "recipe": `**${prefix}recipe <potion name>** - View the recipe for a potion.`,
-        "planted": `**${prefix}planted <greenhouse> <ingredient> <time remaining: hours:minutes (eg 3:25, 1:30, 24:00)>** - Report an ingredient growing in a greenhouse.`,
-        "planted-list": `**${prefix}planted-list [search query]** - List all the planted ingredients in this server.`
       }
     };
 
@@ -66,6 +55,33 @@ module.exports = {
     wizardsUniteArray.forEach(category => {
       const commands = Object.keys(wizardsUniteCommands[category]);
       wizardsUniteCommandsMessage += `**__${category}__**\n${commands.filter(c => !guildData.disabledCommands.includes(c)).map(c => wizardsUniteCommands[category][c]).join("\n")}\n\n`;
+    });
+
+    const reportCommands = {
+      "Reports": {
+        "leaderboard": `**${prefix}leaderboard [emergency/severe/high/medium/low/level/xp/stats]** - View the reporting leaderboard.`,
+
+        "report": `**${prefix}report <emergency/severe/high/medium/low/dark-detector> <details>** - Report a foundable.`,
+        "list": `**${prefix}list [emergency/severe/high/medium/low]** - List the reported foundables in this server.`,
+
+        "planted": `**${prefix}planted <greenhouse> <ingredient> <time remaining: hours:minutes (eg 3:25, 1:30, 24:00)>** - Report an ingredient growing in a greenhouse.`,
+        "planted-list": `**${prefix}planted-list [search query]** - View a list of the planted ingredients in this server.`,
+
+        "dark-detector": `**${prefix}dark-detector <amount> <fortress>** - Report a dark detector.`,
+        "dark-detectors": `**${prefix}dark-detectors** - View a list of the dark detectors in this server.`,
+
+        "subscribe": `**${prefix}subscribe <emergency/severe/high/medium/low/dark-detector>** - Subscribe to notifications.`,
+        "unsubscribe": `**${prefix}unsubscribe <emergency/severe/high/medium/low>** - Unsubscribe from notifications.`,
+        "subscriptions": `**${prefix}subscriptions** - View your subscriptions.`,
+      },
+    };
+
+    const reportCommandsArray = Object.keys(reportCommands);
+    let reportCommandsMessage = "";
+
+    reportCommandsArray.forEach(category => {
+      const commands = Object.keys(reportCommands[category]);
+      reportCommandsMessage += `**__${category}__**\n${commands.filter(c => !guildData.disabledCommands.includes(c)).map(c => reportCommands[category][c]).join("\n")}\n\n`;
     });
 
     const botCommands = {
@@ -137,6 +153,12 @@ module.exports = {
       .setColor(message.guild.me.displayHexColor)
       .setTimestamp();
 
+    const reportCommandEmbed = new Discord.RichEmbed()
+      .setAuthor("Reports Commands", message.author.displayAvatarURL)
+      .setDescription(`${directions}\n\n${reportCommandsMessage}`)
+      .setColor(message.guild.me.displayHexColor)
+      .setTimestamp();
+
     const botCommandsEmbed = new Discord.RichEmbed()
       .setAuthor("Bot Commands", message.author.displayAvatarURL)
       .setDescription(`${directions}\n\n${botCommandsMessage}`)
@@ -157,6 +179,7 @@ module.exports = {
 
     const embeds = [];
     if (wizardsUniteCommandsMessage.length > 0) embeds.push(wizardsUniteEmbed);
+    if (reportCommandsMessage.length > 0) embeds.push(reportCommandEmbed);
     if (botCommandsMessage.length > 0) embeds.push(botCommandsEmbed);
     if (modCommandsMessage.length > 0) embeds.push(modCommandsEmbed);
     if (adminCommandsMessage.length > 0) embeds.push(adminCommandsEmbed);
