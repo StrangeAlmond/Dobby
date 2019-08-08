@@ -20,7 +20,7 @@ module.exports = {
 
       const darkDetectors = guildInfo.darkDetectors.splice(0, pageLength);
       for (const darkDetector of darkDetectors) {
-        embed.addField("\u200b", `**Amount:** ${darkDetector.amount}\n**Location:** ${darkDetector.fortress}`);
+        embed.addField("\u200b", `**Fortress:** ${darkDetector.fortress}\n**Amount:** ${darkDetector.amount}\n**Directions:** ${darkDetector.directions.join(", ")}`, true);
       }
 
       pages.push(embed);
