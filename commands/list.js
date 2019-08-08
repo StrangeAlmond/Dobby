@@ -35,7 +35,7 @@ module.exports = {
       for (const report of reports.splice(i, i + pageLength)) {
         const googleMaps = report.location ? `https://www.google.com/maps/place/${report.location}` : `https://www.google.com/maps/search/${report.details.split(/ +/).join("+")}`;
         const waze = report.location ? `http://waze.to/?ll=${report.location}` : `http://waze.to/?q=times+square${report.details.split(/ +/).join("+")}`;
-        const appleMaps = report.location ? `http://maps.apple.com/?daddr=${report.location}` : `http://maps.apple.com/?q=SEARCH${report.details.split(/ +/).join("+")}`;
+        const appleMaps = report.location ? `http://maps.apple.com/?daddr=${report.location}` : `http://maps.apple.com/?q=${report.details.split(/ +/).join("+")}`;
 
         const directions = `[Google Maps](${googleMaps}), [Apple Maps](${appleMaps})\n[Waze](${waze})`;
 

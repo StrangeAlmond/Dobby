@@ -56,7 +56,7 @@ module.exports = {
 
     if (guildData.planted.find(p => p.greenhouse === greenhouse.join(" "))) return message.channel.send("Someone has already reported that greenhouse!");
 
-    let directions = [`https://www.google.com/maps/search/${greenhouse.join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://maps.apple.com/?q=SEARCH${greenhouse.join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://waze.to/?q=${greenhouse.join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`];
+    let directions = [`https://www.google.com/maps/search/${greenhouse.join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://maps.apple.com/?q=${greenhouse.join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://waze.to/?q=${greenhouse.join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`];
     if (guildData.poi.some(p => greenhouse.join(" ").includes(p.name.toLowerCase()) || p.aliases.some(a => greenhouse.join(" ").includes(a.toLowerCase())))) {
       const poi = guildData.poi.find(p => greenhouse.join(" ").includes(p.name.toLowerCase()) || p.aliases.some(a => greenhouse.join(" ").includes(a.toLowerCase())));
       unknownLocation = false;

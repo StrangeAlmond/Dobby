@@ -62,7 +62,7 @@ module.exports = async bot => {
 
         const guildData = await bot.guildInfo.get(bot, bot.guilds.find(g => g.channels.get(greenhouse.channel)));
 
-        let directions = [`https://www.google.com/maps/search/${greenhouse.greenhouse.split(/ +/g).join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://maps.apple.com/?q=SEARCH${greenhouse.greenhouse.split(/ +/g).join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://waze.to/?q=${greenhouse.greenhouse.split(/ +/g).join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`];
+        let directions = [`https://www.google.com/maps/search/${greenhouse.greenhouse.split(/ +/g).join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://maps.apple.com/?q=${greenhouse.greenhouse.split(/ +/g).join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`, `http://waze.to/?q=${greenhouse.greenhouse.split(/ +/g).join("+")}${guildData.location.location.length > 0 ? `+${guildData.location.location.split(/ +/g).join("+")}` : ""}`];
         if (guildData.poi.some(p => greenhouse.greenhouse.includes(p.name.toLowerCase()) || p.aliases.some(a => greenhouse.greenhouse.includes(a.toLowerCase())))) {
           const poi = guildData.poi.find(p => greenhouse.greenhouse.includes(p.name.toLowerCase()) || p.aliases.some(a => greenhouse.greenhouse.includes(a.toLowerCase())));
           if (greenhouse.unknownLocation) greenhouse.unknownLocation = false;

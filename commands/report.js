@@ -38,7 +38,7 @@ module.exports = {
     const reportRole = await message.guild.roles.find(r => r.name.toLowerCase() === threatLevel);
 
     const googleMapsLink = reportInfo.location ? `https://www.google.com/maps/place/${reportInfo.location}` : `https://www.google.com/maps/search/${reportInfo.details.split(/ +/).join("+")}${guildInfo.location.location.length > 0 ? `+${guildInfo.location.location.split(/ +/).join("+")}` : ""}`;
-    const appleMapsLink = reportInfo.location ? `http://maps.apple.com/?daddr=${reportInfo.location}` : `http://maps.apple.com/?q=SEARCH${reportInfo.details.split(/ +/).join("+")}${guildInfo.location.location.length > 0 ? `+${guildInfo.location.location.split(/ +/).join("+")}` : ""}`;
+    const appleMapsLink = reportInfo.location ? `http://maps.apple.com/?daddr=${reportInfo.location}` : `http://maps.apple.com/?q=${reportInfo.details.split(/ +/).join("+")}${guildInfo.location.location.length > 0 ? `+${guildInfo.location.location.split(/ +/).join("+")}` : ""}`;
     const wazeLink = reportInfo.location ? `http://waze.to/?ll=${reportInfo.location}` : `http://waze.to/?q=${reportInfo.details.split(/ +/).join("+")}${guildInfo.location.location.length > 0 ? `+${guildInfo.location.location.split(/ +/).join("+")}` : ""}`;
 
     const reportEmbed = new Discord.RichEmbed()
