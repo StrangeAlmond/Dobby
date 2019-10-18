@@ -1,86 +1,11 @@
 const Discord = require("discord.js");
-const sm = require("string-similarity");
+const potionData = require("../data/potions.json");
 
 module.exports = {
   name: "recipe",
   description: "View the recipe for a potion",
   aliases: ["potion"],
   async execute(message, args, bot) {
-    const potionData = {
-      "Baruffio's Brain Elixir": {
-        "description": "Grants you extra Wizarding XP from each Trace and Portkey you complete",
-        "level": 1,
-        "brewingTime": "12h 0m",
-        "ingredients": ["2 Leaping Toadstools", "1 Frog Brains", "1 Runespoor Eggs", "1 Powdered Dragon Claw"],
-        "masterNotes": ["Clockwise turn inside the Cauldron ", "Pinch the brewing Potion in the Cauldron", "Horizontal line across the Cauldron", "Horizontal line across the Cauldron", "Zoom out on the brewing Potion in the Cauldron", "Shake your device"],
-        "color": "#4DCA7B"
-      },
-      "Dawdle Draught": {
-        "description": "Reduces a Confoundable's likelihood of fleeing with the Foundable, giving you more chances to cast spells in a Trace",
-        "level": 10,
-        "brewingTime": "6h 0m",
-        "ingredients": ["2 Valerian Root", "1 Sopophorous Beans", "1 Butterscotch", "1 Hermit Crab Shell"],
-        "masterNotes": ["Shake your device", "Clockwise turn inside the Cauldron", "Counter-Clockwise turn inside the Cauldron", "Counter-Clockwise turn inside the Cauldron", "Pinch the brewing Potion in the Cauldron"],
-        "color": "#AA5102"
-      },
-      "Exstimulo Potion": {
-        "description": "Improves your spellcast in both combat and Traces",
-        "level": 1,
-        "brewingTime": "2h 0m",
-        "ingredients": ["1 Re'em blood", "1 Granian Hair", "1 Snowdrop", "1 Bitter Root"],
-        "masterNotes": ["Vertical line across the Cauldron", "Vertical line across the Cauldron", "Clockwise turn inside the Cauldron"],
-        "color": "#78ECF2"
-      },
-      "Invigoration Draught": {
-        "description": "Grants 1 Focus for casting Strategic Spells in Wizarding Challenges",
-        "level": 8,
-        "brewingTime": "3h 0m",
-        "ingredients": ["1 vervain infusion", "1 scurvygrass", "2 lovage"],
-        "masterNotes": ["Horizontal line across the cauldron", "Vertical line across the cauldron", "Vertical line across the cauldron", "Zoom out on the brewing potion in the cauldron"],
-        "color": "#FEBB39"
-      },
-      "Strong Invigoration Draught": {
-        "description": "Grants 3 Focus for casting Strategic Spells in Wizarding Challenges",
-        "level": 13,
-        "brewingTime": "6h 0m",
-        "ingredients": ["1 vervain infusion", "1 scurvygrass", "2 sneezewort"],
-        "masterNotes": ["Horizontal line across the cauldron", "Vertical line across the cauldron", "Vertical line across the cauldron", "Vertical line across the cauldron", "Zoom out on the cauldron", "Zoom out on the cauldron"],
-        "color": "#F75006"
-      },
-      "Strong Exstimulo Potion": {
-        "description": "Greatly improves the next cast in Traces and Challenges",
-        "level": 6,
-        "brewingTime": "6h 0m",
-        "ingredients": ["2 Bitter Root", "2 Snowdrop", "1 Re'em Blood", "1 Abraxan Hair"],
-        "masterNotes": ["Vertical line across the Cauldron", "Vertical line across the Cauldron", "Counter-Clockwise turn inside the Cauldron", "Clockwise turn inside the Cauldron"],
-        "color": "#023386"
-      },
-      "Potent Exstimulo Potion": {
-        "description": "Greatly improves your spellcast in both Combat and Traces",
-        "level": 9,
-        "brewingTime": "8h 0m",
-        "ingredients": ["2 Bitter Root", "2 Snowdrop", "2 Re'em blood", "1 Unicorn Hair"],
-        "masterNotes": ["Vertical line across the Cauldron", "Horizontal line across the Cauldron", "Vertical line across the Cauldron", "Counter-Clockwise turn inside the Cauldron", "Clockwise turn inside the Cauldron", "Counter-Clockwise turn inside the Cauldron"],
-        "color": "#052F7C"
-      },
-      "Healing Potion": {
-        "description": "Restores Stamina that you have lost in combat",
-        "level": 6,
-        "brewingTime": "3h 0m",
-        "ingredients": ["1 Dragon Liver", "1 Wormwood", "1 Bubotuber Pus", "1 Dittany"],
-        "masterNotes": ["Zoom out on the brewing Potion in the Cauldron", "Clockwise turn inside the Cauldron", "Tap multiple times on the brewing Potion in the Cauldron", "Pinch the brewing Potion in the Cauldron"],
-        "color": "#E62141"
-      },
-      "Wit-Sharpening Potion": {
-        "description": "Increases your spell’s efficacy against Master Foes in Challenges",
-        "level": 15,
-        "brewingTime": "4h 0m",
-        "ingredients": ["1 Ginger Root", "1 Newt Spleen", "1 Ground Scarab Beetles", "1 Armadillo Bile"],
-        "masterNotes": ["Zoom out on the brewing Potion in the Cauldron", "Vertical line across the Cauldron", "Vertical line across the Cauldron", "Tap multiple times on the brewing Potion in the Cauldron"],
-        "color": "#1C775B"
-      }
-    };
-
     const emojiGuild = bot.guilds.get("557272213775187988");
     const hasExternalEmojiPerms = message.channel.permissionsFor(message.guild.me).toArray().includes("USE_EXTERNAL_EMOJIS");
 
