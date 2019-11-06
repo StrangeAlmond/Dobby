@@ -4,6 +4,7 @@ const prefix = botconfig.prefix;
 const moment = require("moment-timezone");
 const userInfo = require("../utils/userInfo.js");
 const guildInfo = require("../utils/guildInfo.js");
+const functions = require("../utils/functions.js");
 
 module.exports = async bot => {
   bot.user.setActivity("Just Started, Sorry for the downtime!");
@@ -24,6 +25,8 @@ module.exports = async bot => {
   bot.guildInfo.ensure = guildInfo.ensure;
   bot.guildInfo.set = guildInfo.set;
   bot.guildInfo.delete = guildInfo.delete;
+
+  bot.functions = functions;
 
   setInterval(async () => {
     let guilds = await bot.guildInfo.findAll();
