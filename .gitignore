@@ -1,6 +1,5 @@
-package-lock.json
+logs
 node_modules
 db_backups
-.vscode
+data
 botconfig.json
-logs
