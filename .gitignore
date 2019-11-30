@@ -1,7 +1,6 @@
+package-lock.json
 node_modules
 db_backups
 .vscode
 botconfig.json
 logs
-download_backups.bat
-sync.bat
