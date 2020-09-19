@@ -71,7 +71,7 @@ module.exports = {
         "dark-detectors": `**${prefix}dark-detectors** - View a list of the dark detectors in this server.`,
 
         "subscribe": `**${prefix}subscribe <emergency/severe/high/medium/low/dark-detector>** - Subscribe to notifications.`,
-        "unsubscribe": `**${prefix}unsubscribe <emergency/severe/high/medium/low>** - Unsubscribe from notifications.`,
+        "unsubscribe": `**${prefix}unsubscribe <emergency/severe/high/medium/low/dark-detector>** - Unsubscribe from notifications.`,
         "subscriptions": `**${prefix}subscriptions** - View your subscriptions.`,
       },
     };
