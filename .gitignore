@@ -1,6 +1,5 @@
 logs
 node_modules
 db_backups
-data
 botconfig.json
 package-lock.json
