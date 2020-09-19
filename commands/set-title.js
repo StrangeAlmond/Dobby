@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const titles = require("../data/titles.json");
 
 module.exports = {
   name: "set-title",
@@ -8,17 +9,15 @@ module.exports = {
     const userData = await bot.userInfo.get(bot, message.author, message.guild);
     const guildData = await bot.guildInfo.get(bot, message.guild);
 
-    const choices = ["Calamity Investigator", "Strategic Spellcaster", "Elixir Enthusiast", "Superior Spellcaster", "Statute of Secrecy Supporter", "Challenge Champion", "Eliminator of Elites", "Masterful Magizoologist", "Proficient Professor", "S.O.S Ambassador", "Accomplished Auror", "Advance Guard", "Accomplished Archivist", "Herbaceous Harvester", "Wizarding Wander", "Diligent Diner", "Portkey Passenger", "Helpful Herbologist", "Detector Distributor", "Chamber Challenger", "Practiced Potioneer", "Apprentice Apothecary"];
-
     args = args.join(" ").split(/, +/g);
 
     if (!args[0]) return message.channel.send(`Specify a new title! Proper Usage: \`${guildData.settings.prefix}set-title <choice1>, [choice2], [choice3]\``);
-    if (!choices.find(c => args[0].replace(/'/g, "") === c.toLowerCase().replace(/'/g, ""))) return message.channel.send(`Invalid title! Proper Usage: \`${guildData.settings.prefix}set-title <choice1>, [choice2], [choice3]\``);
+    if (!titles.find(c => args[0].replace(/'/g, "") === c.toLowerCase().replace(/'/g, ""))) return message.channel.send(`Invalid title! Proper Usage: \`${guildData.settings.prefix}set-title <choice1>, [choice2], [choice3]\``);
 
     const newTitles = [];
 
     args.forEach(arg => {
-      newTitles.push(choices.find(c => arg.replace(/'/g, "") === c.toLowerCase().replace(/'/g, "")));
+      newTitles.push(titles.find(c => arg.replace(/'/g, "") === c.toLowerCase().replace(/'/g, "")));
     });
 
     if (newTitles.length <= 0) return message.channel.send(`Invalid title(s)! Proper Usage: \`${guildData.settings.prefix}set-title <choice1>, [choice2], [choice3]\``);
