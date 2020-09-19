@@ -8,7 +8,7 @@ module.exports = {
     const userData = await bot.userInfo.get(bot, message.author, message.guild);
     const guildData = await bot.guildInfo.get(bot, message.guild);
 
-    const choices = ["Calamity Investigator", "Strategic Spellcaster", "Elixir Enthusiast", "Superior Spellcaster", "Statute of Secrecy Supporter", "Challenge Champion", "Eliminator of Elites", "Masterful Magizoologist", "Proficient Professor", "S.O.S Ambassador", "Accomplished Auror", "Advance Guard", "Accomplished Archivist", "Herbaceous Harvester", "Wizarding Wander", "Diligent Diner", "Portkey Passenger", "Helpful Herbologist", "Detector Distributor", "Chamber Challenger", "Practiced Potioneer"];
+    const choices = ["Calamity Investigator", "Strategic Spellcaster", "Elixir Enthusiast", "Superior Spellcaster", "Statute of Secrecy Supporter", "Challenge Champion", "Eliminator of Elites", "Masterful Magizoologist", "Proficient Professor", "S.O.S Ambassador", "Accomplished Auror", "Advance Guard", "Accomplished Archivist", "Herbaceous Harvester", "Wizarding Wander", "Diligent Diner", "Portkey Passenger", "Helpful Herbologist", "Detector Distributor", "Chamber Challenger", "Practiced Potioneer", "Apprentice Apothecary"];
 
     args = args.join(" ").split(/, +/g);
 
