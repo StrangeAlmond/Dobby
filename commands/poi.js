@@ -172,7 +172,7 @@ module.exports = {
       if (searchResults.length <= 0) return message.channel.send("No Points of Interest were found for that search query.");
 
       const poiEmbed = new Discord.RichEmbed()
-        .setAuthor("POI Search")
+        .setAuthor("🔍 POI Search")
         .setColor(message.guild.me.displayHexColor)
         .setTimestamp();
 
